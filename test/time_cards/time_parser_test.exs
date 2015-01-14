@@ -21,6 +21,15 @@ defmodule TimeCards.TimeParserTest do
     assert converted_time == 1.25
   end
 
+  test "it can determine if an entry is within an initial time range" do
+    initial = {{2015, 1, 12}, {12, 15, 0}}
+    entry = {{2015, 1, 13}, {12, 15, 0}}
+
+    result = TimeParser.after_initial(entry, initial)
+
+    assert result == true
+  end
+
   defp parsed_time do
     %Timex.DateTime{calendar: :gregorian, day: 13, hour: 12, minute: 15,
        month: 1, ms: 0, second: 0,
