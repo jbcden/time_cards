@@ -1,6 +1,7 @@
 defmodule TimeCards.TimeParserTest do
   use ExUnit.Case
   alias TimeCards.TimeParser
+  alias TimeCards.Entry
 
   test "it can parse a tuple representing a datetime" do
     datetime = {{2015, 1, 13}, {12, 15, 0}}
@@ -23,9 +24,18 @@ defmodule TimeCards.TimeParserTest do
 
   test "it can determine if an entry is within an initial time range" do
     initial = {{2015, 1, 12}, {12, 15, 0}}
-    entry = {{2015, 1, 13}, {12, 15, 0}}
+    entry = %Entry{time_start: {{2015, 1, 13}, {12, 15, 0}}}
 
     result = TimeParser.after_initial(entry, initial)
+
+    assert result == true
+  end
+
+  test "it can determine if an entry is within an end time range" do
+    end_time = {{2015, 1, 12}, {12, 15, 0}}
+    entry = %Entry{time_start: {{2015, 1, 11}, {12, 15, 0}}}
+
+    result = TimeParser.before_end(entry, end_time)
 
     assert result == true
   end
