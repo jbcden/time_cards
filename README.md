@@ -1,4 +1,6 @@
 TimeCards
 =========
 
-** TODO: Add description **
+** TODO **
+- Add a persistence layer for a %Person with entries
+- Begin adding web backend
