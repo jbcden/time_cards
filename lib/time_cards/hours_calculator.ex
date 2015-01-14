@@ -2,6 +2,12 @@ defmodule TimeCards.HoursCalculator do
   alias Timex.Date
   alias TimeCards.TimeParser
 
+  def calculate([]), do: 0
+
+  def calculate([entry|tail]) do
+    calculate(entry) + calculate(tail)
+  end
+
   def calculate(entry) do
     start_time = TimeParser.parse(entry.time_start)
     end_time   = TimeParser.parse(entry.time_end)
