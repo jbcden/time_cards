@@ -4,7 +4,7 @@ defmodule TimeCards.Mixfile do
   def project do
     [app: :time_cards,
      version: "0.0.1",
-     elixir: "~> 1.0.2",
+     elixir: "~> 1.0.0",
      deps: deps]
   end
 
@@ -12,7 +12,7 @@ defmodule TimeCards.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :postgrex, :ecto]]
   end
 
   # Dependencies can be Hex packages:
@@ -25,6 +25,10 @@ defmodule TimeCards.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    [{:timex, "~> 0.13.3"}]
+    [
+      {:timex, "~> 0.13.3"},
+      {:postgrex, ">= 0.0.0"},
+      {:ecto, "~> 0.5"}
+    ]
   end
 end
