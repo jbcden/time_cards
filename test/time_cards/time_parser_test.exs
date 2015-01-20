@@ -23,8 +23,9 @@ defmodule TimeCards.TimeParserTest do
   end
 
   test "it can determine if an entry is within an initial time range" do
-    initial = {{2015, 1, 12}, {12, 15, 0}}
-    entry = %Entry{time_start: {{2015, 1, 13}, {12, 15, 0}}}
+    initial = :calendar.datetime_to_gregorian_seconds({{2015, 1, 12}, {12, 15, 0}})
+    start = :calendar.datetime_to_gregorian_seconds({{2015, 1, 13}, {12, 15, 0}})
+    entry = %Entry{time_start: start}
 
     result = TimeParser.after_initial(entry, initial)
 
@@ -32,8 +33,8 @@ defmodule TimeCards.TimeParserTest do
   end
 
   test "it can determine if an entry is within an end time range" do
-    end_time = {{2015, 1, 12}, {12, 15, 0}}
-    entry = %Entry{time_start: {{2015, 1, 11}, {12, 15, 0}}}
+    end_time = :calendar.datetime_to_gregorian_seconds({{2015, 1, 12}, {12, 15, 0}})
+    entry = %Entry{time_start: :calendar.datetime_to_gregorian_seconds({{2015, 1, 11}, {12, 15, 0}})}
 
     result = TimeParser.before_end(entry, end_time)
 
